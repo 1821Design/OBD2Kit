@@ -113,7 +113,7 @@ NSString* const kGoLinkScanToolName		= @"GoLink";
 		FLDEBUG(@"bytesRemaining = %d ** dataFrameAddr = %p", bytesRemaining, frameHeader)
 		
 		if ((sizeof(GoLinkFrameHeader) + frameHeader->length) > bytesRemaining) {
-			FLERROR(@"Dropping incomplete frame. Expecting %d, bytesRemaining %d", (sizeof(GoLinkFrameHeader) + frameHeader->length), bytesRemaining)
+			FLERROR(@"Dropping incomplete frame. Expecting %lu, bytesRemaining %d", (sizeof(GoLinkFrameHeader) + frameHeader->length), bytesRemaining)
 			break;
 		}
 		
@@ -182,7 +182,7 @@ NSString* const kGoLinkScanToolName		= @"GoLink";
 		
 		switch (GOLINK_FRAME_TYPE(_readBuf)) {
 			case kGLFrameTypeError:
-				FLERROR(@"ERROR FRAME", nil)
+				FLERROR(@"ERROR FRAME %@", nil)
 				GoLinkErrorFrame* errorFrame	= (GoLinkErrorFrame*)_readBuf;
 				[self processErrorFrame:errorFrame];		
 				break;
@@ -199,14 +199,14 @@ NSString* const kGoLinkScanToolName		= @"GoLink";
 				break;
 				
 			default:
-				FLERROR(@"Received unknown GoLink frame type", nil)
+				FLERROR(@"Received unknown GoLink frame type %@", nil)
 				break;
 		}
 		
 		CLEAR_GOLINK()
 		
 		if(_initState == GOLINK_INIT_STATE_COMPLETE && STATE_INIT()) {
-			FLDEBUG(@"*** Init Complete ***", nil)
+			FLDEBUG(@"*** Init Complete *** %@", nil)
 			_initState			= GOLINK_INIT_STATE_PROTOCOL;
 			_currentPIDGroup	= 0x00;
 			FLINFO(@"*** STATE_IDLE ***")
@@ -225,7 +225,7 @@ NSString* const kGoLinkScanToolName		= @"GoLink";
 		}		
 	}
 	else {
-		FLERROR(@"Incomplete Frame", nil)
+		FLERROR(@"Incomplete Frame %@", nil)
 		CLEAR_GOLINK()
 		_state = (STATE_INIT()) ? STATE_INIT : STATE_IDLE;		
 	}
@@ -278,7 +278,7 @@ NSString* const kGoLinkScanToolName		= @"GoLink";
 			
 			break;
 		default:
-			FLERROR(@" *** UNKNOWN GOLINK SYSTEM STATUS ***", nil)
+			FLERROR(@" *** UNKNOWN GOLINK SYSTEM STATUS *** %@", nil)
 			break;
 	}
 }
@@ -304,7 +304,7 @@ NSString* const kGoLinkScanToolName		= @"GoLink";
 															 pid:frame->requestPid 
 															data:nil]];
 		default:
-			FLERROR(@"*** UNKNOWN GOLINK ERROR STATUS ***", nil)
+			FLERROR(@"*** UNKNOWN GOLINK ERROR STATUS *** %@", nil)
 			break;
 	}
 }

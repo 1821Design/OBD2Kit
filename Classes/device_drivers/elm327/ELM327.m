@@ -247,7 +247,7 @@
 				CLEAR_READBUF()
 				
 				if(INIT_COMPLETE(_initState)) {
-					FLDEBUG(@"Init Complete", nil)
+					FLDEBUG(@"Init Complete %@", nil)
 					_initState	= ELM327_INIT_STATE_UNKNOWN;
 					_state		= STATE_IDLE;
 					[self dispatchDelegate:@selector(scanToolDidInitialize:) withObject:nil];
@@ -392,7 +392,7 @@
 		[self handleOutputEvent:eventCode];
 	}
 	else {
-		FLERROR(@"Received event for unknown stream", nil);
+		FLERROR(@"Received event for unknown stream %@", nil);
 	}	
 }
 
@@ -432,7 +432,7 @@
 				break;
 				
 			case NSStreamEventErrorOccurred:
-				FLERROR(@"NSStreamEventErrorOccurred", nil)
+				FLERROR(@"NSStreamEventErrorOccurred %@", nil)
 				
 				NSError* error = [_inputStream streamError];
 				
@@ -475,7 +475,7 @@
 				break;
 				
 			case NSStreamEventErrorOccurred:
-				FLERROR(@"NSStreamEventErrorOccurred", nil)
+				FLERROR(@"NSStreamEventErrorOccurred %@", nil)
 				NSError* error = [_outputStream streamError];				
 				FLNSERROR(error)
 				break;

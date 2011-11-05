@@ -89,7 +89,7 @@
         _cachedWriteData = [[NSMutableData alloc] init];
     }
 	
-	FLDEBUG(@"Writing command to cached data", nil)
+	FLDEBUG(@"Writing command to cached data %@", nil)
     [_cachedWriteData appendData:[command data]];
 	[self writeCachedData];
 }
@@ -120,7 +120,7 @@
 	}
 	
 	if (!_cachedWriteData) {
-		FLERROR(@"No cached data to write (_cachedWriteData == nil)", nil)
+		FLERROR(@"No cached data to write (_cachedWriteData == nil) %@", nil)
 		return;
 	}
 	
@@ -138,7 +138,7 @@
 		bytesWritten = [oStream write:[_cachedWriteData bytes]
 							maxLength:[_cachedWriteData length]];
 		if (bytesWritten == -1) {
-			FLERROR(@"Write Error", nil)
+			FLERROR(@"Write Error %@", nil)
 			break;
 		}
 		else if(bytesWritten > 0 && [_cachedWriteData length] > 0) {

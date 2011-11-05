@@ -178,7 +178,7 @@ static FLEAController* g_sharedController = nil;
 															object:self 
 														  userInfo:nil];
     } else {
-        FLERROR(@"could not find disconnected accessory in accessory list", nil);
+        FLERROR(@"could not find disconnected accessory in accessory list %@", nil);
     }
 }
 

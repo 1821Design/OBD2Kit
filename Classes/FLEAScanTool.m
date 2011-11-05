@@ -98,7 +98,7 @@
 		[[_session outputStream] open];
     }
     else     {
-        FLERROR(@"creating session failed", nil)
+        FLERROR(@"creating session failed %@", nil)
     }
 	
     return (_session != nil);
@@ -134,7 +134,7 @@
         _cachedWriteData = [[NSMutableData alloc] init];
     }
 	
-	FLDEBUG(@"Writing command to cached data", nil)
+	FLDEBUG(@"Writing command to cached data %@", nil)
     [_cachedWriteData appendData:[command data]];
 	[self writeCachedData];
 }
@@ -153,7 +153,7 @@
 #pragma mark EAAccessoryDelegate Methods
 
 - (void) accessoryDidDisconnect:(EAAccessory *)accessory {
-    FLDEBUG(@"the accessory was disconnected", nil)
+    FLDEBUG(@"the accessory was disconnected %@", nil)
 	[self dispatchDelegate:@selector(scanToolDidDisconnect:) withObject:nil];
 }
 
@@ -201,7 +201,7 @@
 	}
 
 	if (!_cachedWriteData) {
-		FLERROR(@"No cached data to write (_cachedWriteData == nil)", nil)
+		FLERROR(@"No cached data to write (_cachedWriteData == nil) %@", nil)
 		return;
 	}
 	
@@ -219,7 +219,7 @@
 		bytesWritten = [oStream write:[_cachedWriteData bytes]
 							maxLength:[_cachedWriteData length]];
 		if (bytesWritten == -1) {
-			FLERROR(@"Write Error", nil)
+			FLERROR(@"Write Error %@", nil)
 			break;
 		}
 		else if(bytesWritten > 0 && [_cachedWriteData length] > 0) {
