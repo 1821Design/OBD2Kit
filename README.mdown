@@ -1,6 +1,10 @@
 OBD2Kit iPhone Car Diagnostic Library
 =====================================
 
+
+UNTESTED CHANGES - You have been warned :)
+=====================================
+
 More documentation coming soon.  In the interim, please see the SampleApps folder for reference on how to use the tools contained within OBD2Kit.
 
 Contributors
